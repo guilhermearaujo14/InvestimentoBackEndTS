@@ -5,6 +5,7 @@ import 'dotenv/config';
 
 
 const app = express();
+app.use(express.json())
 const PORT = 3300;
 app.use(router)
 conexao();

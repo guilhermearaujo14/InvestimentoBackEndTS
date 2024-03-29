@@ -11,7 +11,7 @@ router.get('/teste', (req: Request, res: Response)=>{
 })
 
 /* ROTAS INVESTIMENTOS */
-router.post('/cadastraInvestimento', CadastrarInvestimentosController);
+router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosController);
 
 
 

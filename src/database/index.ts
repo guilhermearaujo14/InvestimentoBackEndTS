@@ -12,11 +12,10 @@ async function conexao (){
 
     if(connetion){
         console.log('Conexão com banco de dados realizada');
+        return connetion;
     }else{
         console.log('Não foi possivel conectar com banco de dados.');
     }
-
-    connetion.end();
 }
 
 
