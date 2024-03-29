@@ -7,7 +7,7 @@ class Movimentacoes{
     DATA_MOVIMENTACAO: Date;
     isCOMPRA: boolean;
     isVENDA: boolean;
-    DATA_INCLUSAO: Date
+    DATA_INCLUSAO?: Date
 
     constructor(ID: number, INVESTIMENTOS_ID: number, QUANTIDADE: number, PRECO: number, TOTAL: number, DATA_MOVIMENTACAO: Date, isCOMPRA:boolean, isVENDA: boolean, DATA_INCLUSAO: Date){
         this.ID = ID;
@@ -21,9 +21,9 @@ class Movimentacoes{
         this.DATA_INCLUSAO = DATA_INCLUSAO
     }
 
-    static async Criamovimentacao(INVESTIMENTOS_ID: number, QUANTIDADE: number, PRECO: number, TOTAL: number, DATA_MOVIMENTACAO: Date, isCOMPRA: boolean, isVENDA: boolean, DATA_INCLUSAO: Date){
+    static async Criamovimentacao(INVESTIMENTOS_ID: number, QUANTIDADE: number, PRECO: number, TOTAL: number, DATA_MOVIMENTACAO: Date, isCOMPRA: boolean, isVENDA: boolean){
         const sql  = `INSERT INTO MOVIMENTACOES (INVESTIMENTOS_ID, QUANTIDADE, PRECO, TOTAL, DATA_MOVIMENTACAO, isCOMPRA, isVENDA, DATA_INCLUSAO)
-        VALUES (${INVESTIMENTOS_ID},${QUANTIDADE},${PRECO},${TOTAL},${DATA_MOVIMENTACAO},${isCOMPRA},${isVENDA},${DATA_INCLUSAO})`;
+        VALUES (${INVESTIMENTOS_ID},${QUANTIDADE},${PRECO},${TOTAL},'${DATA_MOVIMENTACAO}',${isCOMPRA},${isVENDA},now())`;
         return sql;
     }
 }
