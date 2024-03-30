@@ -8,27 +8,41 @@ import Movimentacoes from '../../../models/movimentacaoModel/index';
 
 async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovimentacaoInterface){
     const con = await db(); 
-    let result: any
+    let result: any;
+    let id_investimento: number;
+    let isUpdateInvestimento: boolean;
+    let total: number;
     try {
-        const pesquisaAtivo: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL)
+        const pesquisaAtivo: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
+        total = investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO * investimentoMovimentacao.PRECO;
         
         if(pesquisaAtivo[0].length == 0 || pesquisaAtivo[0] === undefined){
-            let total = investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO*investimentoMovimentacao.PRECO
+            isUpdateInvestimento = false;
 
-            const sql = await Investimentos.CriaInvestimento(investimentoMovimentacao.USUARIO_ID, investimentoMovimentacao.TIPO_ATIVO_ID, investimentoMovimentacao.PAPEL, investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO, investimentoMovimentacao.PRECO, total);
+            const sql = await Investimentos.CriaInvestimento(investimentoMovimentacao.USUARIO_ID,
+                                                             investimentoMovimentacao.TIPO_ATIVO_ID,
+                                                             investimentoMovimentacao.PAPEL,
+                                                             investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO,
+                                                             investimentoMovimentacao.PRECO, total);
             result = await con?.execute(sql);
             
-            const AtivoCadastrado: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL)
-            const id_investimento: number = AtivoCadastrado[0][0].ID;//AQUI TENHO QUE COLOCAR O ID DO INVESTIMENTO QUE CRIEI.
-
-            const movimentacao =  new Movimentacoes(0, id_investimento, investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO, investimentoMovimentacao.PRECO, total, investimentoMovimentacao.DATA_COMPRA, investimentoMovimentacao.isCOMPRA, investimentoMovimentacao.isVENDA, new Date());   
-            const movimentacaoCadastrada = await CadastraMovimentacao(movimentacao);
+            const AtivoCadastrado: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
+            id_investimento = AtivoCadastrado[0][0].ID; // aqui preencho o ID do ativo que acabei de cadastrar em investimentos
 
         }else{
-            console.log('Não crirou outro investimento ' + pesquisaAtivo[0][0].ID)
+            id_investimento = pesquisaAtivo[0][0].ID; // aqui pego o ID do ativo encontrado na pesquisa.
+            isUpdateInvestimento = true;
         }
-                
-            return {isSucesso: true, message: 'Investimento inserido com sucesso!', result}    
+
+        const movimentacao =  new Movimentacoes(0, id_investimento, investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO,
+                                                investimentoMovimentacao.PRECO,
+                                                total,
+                                                investimentoMovimentacao.DATA_COMPRA,
+                                                investimentoMovimentacao.isCOMPRA,
+                                                investimentoMovimentacao.isVENDA, new Date());   
+        const movimentacaoCadastrada = await CadastraMovimentacao(movimentacao, isUpdateInvestimento);
+
+        return {isSucesso: true, message: 'Investimento inserido com sucesso!', result}    
         
     } catch (error) {
         console.log(error)
