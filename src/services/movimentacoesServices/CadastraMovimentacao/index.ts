@@ -27,6 +27,7 @@ async function CadastraMovimentacao(movimentacoes: movimentacoesModel, isUpdateI
                 }else{
                     isPodeAtualizar = false;
                     isPodeCadastrarMovimentacao = false;
+                    result = {isSucesso: false, message: 'Ops... Quantidade informada é maior do que disponivel para venda!'}
                 }
                 investimentoParaAtualizar.QUANTIDADE -= movimentacoes.QUANTIDADE;
                 investimentoParaAtualizar.TOTAL_INVESTIDO -= movimentacoes.TOTAL;
@@ -48,10 +49,11 @@ async function CadastraMovimentacao(movimentacoes: movimentacoesModel, isUpdateI
             }            
         
         if(isPodeCadastrarMovimentacao === true){
-            result = await con?.execute(sql_CriaMovimentacao);
-            return {isSucesso: true, message: 'Cadastro realizado com sucesso!'}
+            await con?.execute(sql_CriaMovimentacao);
+            result = {isSucesso: true, message: 'Ativo inserido com sucesso!'}
+            return result;
         }else{
-            return {isSucesso: false, message: 'Operação não registrada!'};
+            return result;
         }
 
     } catch (error) {
