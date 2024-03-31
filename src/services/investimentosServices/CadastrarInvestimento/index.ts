@@ -42,10 +42,10 @@ async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovi
                                                 investimentoMovimentacao.isVENDA, new Date());   
         const movimentacaoCadastrada = await CadastraMovimentacao(movimentacao, isUpdateInvestimento);
 
-        return {isSucesso: true, message: 'Investimento inserido com sucesso!', result}    
+        return movimentacaoCadastrada    
         
     } catch (error) {
-        console.log(error)
+        console.log('[ERROR] - CadastrarInvestimentos: ',error)
         return {isSucesso: false, message: 'Erro ', error};
 
     }finally{

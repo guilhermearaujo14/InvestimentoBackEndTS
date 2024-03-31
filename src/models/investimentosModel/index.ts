@@ -38,7 +38,7 @@ class Investimentos {
         return sql;
     }
 
-    static async AtualizaInvestimentos(ID: number, QUANTIDADE?: number, PRECO_MEDIO?: number, TOTAL_INVESTIDO?: number){
+    static async AtualizaInvestimentos(ID?: number, QUANTIDADE?: number, PRECO_MEDIO?: number, TOTAL_INVESTIDO?: number){
         const sql = `UPDATE INVESTIMENTOS SET QUANTIDADE = ${QUANTIDADE}, PRECO_MEDIO = ${PRECO_MEDIO}, TOTAL_INVESTIDO = ${TOTAL_INVESTIDO} WHERE ID = ${ID}`;
         return sql;
     }
