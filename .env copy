@@ -5,3 +5,8 @@ HOST=
 USER=
 PASSWORD=
 DATA_BASE=
+
+//Api google
+
+spreadsheets=xxx
+API_KEY=xxx

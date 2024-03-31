@@ -15,5 +15,10 @@ router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosControlle
 
 
 
+// testes de rotas especificas
+import LerGoogleSheet from "./api/google";
+router.get('/google', LerGoogleSheet);
+
+
 
 export default router;

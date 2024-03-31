@@ -5,6 +5,8 @@ import Pesquisainvestimento from '../PesquisaInvestimento';
 import investimentoMovimentacaoInterface from '../../../interface/InvestimentoMovimentacao/index';
 import CadastraMovimentacao from '../../movimentacoesServices/CadastraMovimentacao';
 import Movimentacoes from '../../../models/movimentacaoModel/index';
+import LerGoogleSheet from '../../../api/google';
+import FiltraAtivoByPapel, { listaInterface } from '../../../utils/FiltraAtivoByPapel';
 
 async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovimentacaoInterface){
     const con = await db(); 
@@ -13,6 +15,13 @@ async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovi
     let isUpdateInvestimento: boolean;
     let total: number;
     try {
+        const listaGoogle: any = await LerGoogleSheet();
+        const ativo = FiltraAtivoByPapel(listaGoogle, investimentoMovimentacao.PAPEL);
+
+        if(!ativo){
+            return {isSucesso: false, message: 'Ops... Parece que o código digitado não esta correto, verifique!'}
+        }
+        
         const pesquisaAtivo: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
         total = investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO * investimentoMovimentacao.PRECO;
         
@@ -21,7 +30,7 @@ async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovi
 
             const sql = await Investimentos.CriaInvestimento(investimentoMovimentacao.USUARIO_ID,
                                                              investimentoMovimentacao.TIPO_ATIVO_ID,
-                                                             investimentoMovimentacao.PAPEL,
+                                                             investimentoMovimentacao.PAPEL.toUpperCase(),
                                                              investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO,
                                                              investimentoMovimentacao.PRECO, total);
             result = await con?.execute(sql);
