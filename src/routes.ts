@@ -16,8 +16,8 @@ router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosControlle
 
 
 // testes de rotas especificas
-import LerGoogleSheet from "./api/google";
-router.get('/google', LerGoogleSheet);
+import ExibeMeusInvestimentos from "./services/investimentosServices/ExibeMeusInvestimentos";
+router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
 
 
 
