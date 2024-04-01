@@ -1,11 +1,9 @@
-import { Request, Response } from 'express';
 import db from '../../../database';
 import MeusInvestimentos from '../../../interface/MeusInvestimentos';
 import FiltraAtivoByPapel from '../../../utils/FiltraAtivoByPapel';
 import LerGoogleSheet from '../../../api/google';
 
-async function ExibeMeusInvestimentos(req: Request, res: Response){
-    const { USUARIO_ID } = req.params
+async function ExibeMeusInvestimentos(USUARIO_ID: number){
     const con = await db();
     const sql = `
     SELECT INVESTIMENTOS.ID, INVESTIMENTOS.PAPEL, INVESTIMENTOS.TIPO_ATIVO_ID , TIPO_ATIVO.DESCRICAO, INVESTIMENTOS.PRECO_MEDIO, INVESTIMENTOS.TOTAL_INVESTIDO,
@@ -17,7 +15,6 @@ async function ExibeMeusInvestimentos(req: Request, res: Response){
     try {
         const result: any = await con?.execute(sql, [USUARIO_ID]);
         const listaGoogle: any = await LerGoogleSheet();
-        console.log(result)
         result[0].map(async (item: any)=>{
             let Ativo: any = FiltraAtivoByPapel(listaGoogle, item.PAPEL);
             item.COTACAO = Ativo[0].cotacao;
@@ -27,7 +24,7 @@ async function ExibeMeusInvestimentos(req: Request, res: Response){
         })
 
         const meusInvestimentos: MeusInvestimentos[] = result
-        return res.send(meusInvestimentos[0]);
+        return meusInvestimentos[0];
 
 
     } catch (error) {
