@@ -12,7 +12,7 @@ async function Pesquisainvestimento(ID?: number, USUARIO_ID?: number, TIPO_ATIVO
         console.log(error)
         return {isSucesso: false, message: 'Ops... Ocorreu um erro ao realizar operacao de pesquisar investimento => '+ error}
     }finally{
-        con?.end()
+        con?.end() 
     }
 
 }
