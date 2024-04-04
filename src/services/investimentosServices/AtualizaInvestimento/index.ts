@@ -10,7 +10,7 @@ async function AtualizaInvestimento(investimento: Investimentos){
         const res = await con?.execute(sql_UpdateInvestimento);
         return true;
     } catch (error) {
-        console.log('[ERROR] - AtualizaInvestimento: ',error);
+        console.log('[ERROR] - AtualizaInvestimento: ',error); 
         return false
     }
 
