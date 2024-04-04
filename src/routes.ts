@@ -5,6 +5,9 @@ import CadastrarInvestimentosController from "./controllers/investimentosControl
 import ExibeMeusInvestimentos from '../src/controllers/investimentosController/ExibeMeusInvestimentos'
 
 
+/* IMPORTAÇÃO ARQUIVO TOTALIZADORES */
+import ExibeTotalizadores from "./controllers/totalizadoresController";
+
 const router = Router();
 
 router.get('/teste', (req: Request, res: Response)=>{
@@ -14,6 +17,10 @@ router.get('/teste', (req: Request, res: Response)=>{
 /* ROTAS INVESTIMENTOS */
 router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosController);
 router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
+
+
+/* ROTAS TOTALLIZADORES */
+router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);
 
 
 
