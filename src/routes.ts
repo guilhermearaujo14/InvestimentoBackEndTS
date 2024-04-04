@@ -23,7 +23,3 @@ router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
 
 export default router;
 
-/*
-spreadsheets=1AcWSEYKTeQxjEUTUs-GP08z_jVb8hemQFsKV6IJl71I
-API_KEY=AIzaSyAbA50UU-Dr2MrQlzcrZ6xqRcqQqcNgjy4
-*/
