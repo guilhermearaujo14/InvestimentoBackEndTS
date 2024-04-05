@@ -19,9 +19,8 @@ try {
 
     const isSenhasIguais = await ComparaSenhas(SENHA, usuario.SENHA);
     if(isSenhasIguais){
-        return {isSucesso: true, message: `Bem-vindo ${usuario.NOME}!`}
+        return {isSucesso: true, message: `Bem-vindo ${usuario.NOME}!`, usuario: usuario.NOME, usuario_id: usuario.ID}
     }else{
-
         return {isSucesso: false, message: `Ops... Nâo foi possível fazer login, tente novamente em instantes!`}
     }
 
