@@ -6,7 +6,7 @@ class Usuario{
     TELEFONE?: string;
     EMAIL: string;
     SENHA: string;
-    DATA_INCLUSAO: Date;
+    DATA_INCLUSAO?: Date;
 
     constructor(ID: number, NOME: string, CPF: string, DATA_NASCIMENTO: Date, TELEFONE:string, EMAIL: string, SENHA: string, DATA_INCLUSAO: Date){
         this.ID = ID,
@@ -20,9 +20,9 @@ class Usuario{
     }
 
 
-    static async CadastraUsuario(usuario: Usuario){
+    static async CadastraUsuario(NOME: string, CPF: string, DATA_NASCIMENTO: Date | undefined, TELEFONE:string | undefined, EMAIL: string, SENHA: string){
         let sql = `INSERT INTO USUARIO (NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA, DATA_INCLUSAO) 
-        VALUES (${usuario.NOME},${usuario.CPF},${usuario.DATA_NASCIMENTO},${usuario.TELEFONE},${usuario.EMAIL},${usuario.SENHA},${usuario.DATA_INCLUSAO})`
+        VALUES (${NOME},${CPF},'${DATA_NASCIMENTO}',${TELEFONE},${EMAIL},${SENHA}, now())`
         return sql
     }
 
