@@ -26,6 +26,22 @@ class Movimentacoes{
         VALUES (${INVESTIMENTOS_ID},${QUANTIDADE},${PRECO},${TOTAL},'${DATA_MOVIMENTACAO}',${isCOMPRA},${isVENDA},now())`;
         return sql;
     }
+
+    static async PesquisaMovimentacao(USUARIO_ID: number, dataInicio?: string, dataFinal?: string, PAPEL?: string, TIPO_ATIVO_ID?: string){
+        let tipoAtivo = ''
+        TIPO_ATIVO_ID == '' ? tipoAtivo = "1=1" : tipoAtivo = " AND INVESTIMENTOS.TIPO_ATIVO_ID = " +TIPO_ATIVO_ID
+        
+        const sql = `SELECT * 
+                        FROM MOVIMENTACOES
+                        JOIN INVESTIMENTOS ON (MOVIMENTACOES.INVESTIMENTOS_ID = INVESTIMENTOS.ID)
+                        WHERE 
+                            INVESTIMENTOS.USUARIO_ID = ${USUARIO_ID}
+                        AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '${dataInicio}' AND '${dataFinal}'
+                        AND ((INVESTIMENTOS.PAPEL = '${PAPEL}') OR ('${PAPEL}' IS NULL) OR ('${PAPEL}' = ''))
+                        ${tipoAtivo}
+                        `;
+        return sql;
+    }
 }
 
 export default Movimentacoes;

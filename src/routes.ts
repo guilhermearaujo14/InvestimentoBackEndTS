@@ -10,20 +10,27 @@ import ExibeMeusInvestimentos from '../src/controllers/investimentosController/E
 /* IMPORTAÇÃO ARQUIVO TOTALIZADORES */
 import ExibeTotalizadores from "./controllers/totalizadoresController";
 
+/* IMPORTAÇÃO ARQUIVOS USUARIO */
+import Login from "./controllers/usuarioController/Login";
+import CadastraUsuario from "./controllers/usuarioController/CadastraUsuario";
+import ValidaCamposCadastroUsuario from "./middlewares/UsuarioMiddlewar/ValidaCampos";
+
+
+/* IMPORTAÇÃO ARQUIVOS MOVIMENTAÇÃO */
+import PesquisaMovimentacao from "./controllers/movimentacoesController/PesquisaMovimentacao";
+
+
 
 /* ROTAS INVESTIMENTOS */
 router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosController);
 router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
 
+/* ROTAS MOVIMENTAÇÕES */
+router.get('/movimentacoes/:USUARIO_ID', PesquisaMovimentacao)
 
 /* ROTAS TOTALLIZADORES */
 router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);
 
-
-/* IMPORTAÇÃO ARQUIVOS USUARIO */
-import Login from "./controllers/usuarioController/Login";
-import CadastraUsuario from "./controllers/usuarioController/CadastraUsuario";
-import ValidaCamposCadastroUsuario from "./middlewares/UsuarioMiddlewar/ValidaCampos";
 
 /* ROTAS USUARIO */
 router.post('/Login', Login);
