@@ -5,9 +5,9 @@ async function PesquisaMovimentacoes(USUARIO_ID: number, dataInicio?: string | u
     const con = await db();
     try {
         const sql = await Movimentacoes.PesquisaMovimentacao(USUARIO_ID, dataInicio, dataFinal, PAPEL, TIPO_ATIVO_ID);
-        const response = await con?.execute(sql)
+        const response: any = await con?.execute(sql)
 
-        return response
+        return response[0]
 
     } catch (error) {
         console.log('[ERROR] - PesquisaMovimentacao: ', error);
