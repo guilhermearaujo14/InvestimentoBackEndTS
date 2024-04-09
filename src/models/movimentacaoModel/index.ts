@@ -28,16 +28,23 @@ class Movimentacoes{
     }
 
     static async PesquisaMovimentacao(USUARIO_ID: number, dataInicio?: string, dataFinal?: string, PAPEL?: string, TIPO_ATIVO_ID?: string){
-        let tipoAtivo = ''
-        TIPO_ATIVO_ID == '' ? tipoAtivo = "1=1" : tipoAtivo = " AND INVESTIMENTOS.TIPO_ATIVO_ID = " +TIPO_ATIVO_ID
+        let FiltroDatas = '';
+        dataInicio == '' || dataInicio == undefined  || dataFinal == '' || dataFinal == undefined  ? FiltroDatas ="AND 1=1" : FiltroDatas = "AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '${dataInicio}' AND '${dataFinal}'"
         
-        const sql = `SELECT * 
+        let tipoAtivo = '';
+        TIPO_ATIVO_ID == '' || TIPO_ATIVO_ID == undefined ? tipoAtivo = "AND 1=1" : tipoAtivo = " AND INVESTIMENTOS.TIPO_ATIVO_ID = " +TIPO_ATIVO_ID
+        
+        let FiltroPapel = '';
+        PAPEL == '' || PAPEL == undefined ? FiltroPapel = "AND 1=1" : FiltroPapel = "AND INVESTIMENTOS.PAPEL LIKE '%" + PAPEL +"%'"
+
+        const sql = `SELECT MOVIMENTACOES.ID, INVESTIMENTOS.PAPEL,  MOVIMENTACOES.QUANTIDADE, MOVIMENTACOES.PRECO, MOVIMENTACOES.TOTAL, MOVIMENTACOES.DATA_MOVIMENTACAO,
+                        CASE WHEN MOVIMENTACOES.ISCOMPRA = 1 THEN 'Compra' ELSE 'Venda' END TIPO 
                         FROM MOVIMENTACOES
                         JOIN INVESTIMENTOS ON (MOVIMENTACOES.INVESTIMENTOS_ID = INVESTIMENTOS.ID)
                         WHERE 
-                            INVESTIMENTOS.USUARIO_ID = ${USUARIO_ID}
-                        AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '${dataInicio}' AND '${dataFinal}'
-                        AND ((INVESTIMENTOS.PAPEL = '${PAPEL}') OR ('${PAPEL}' IS NULL) OR ('${PAPEL}' = ''))
+                            INVESTIMENTOS.USUARIO_ID = ${USUARIO_ID} 
+                        ${FiltroDatas} 
+                        ${FiltroPapel}
                         ${tipoAtivo}
                         `;
         return sql;
