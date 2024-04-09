@@ -4,15 +4,15 @@ import investimentoMovimentacaoInterface from '../../../interface/InvestimentoMo
 
 async function CadastrarInvestimentos(req: Request, res: Response){
     const { USUARIO_ID } = req.params;
-    const {TIPO_ATIVO_ID, PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA } = req.body;
+    const { PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA } = req.body;
     
     try {
         const investimentoMovimentacao: investimentoMovimentacaoInterface = { 
                             USUARIO_ID: parseInt(USUARIO_ID),
-                            TIPO_ATIVO_ID: TIPO_ATIVO_ID,
+                            TIPO_ATIVO_ID: 0,
                             PAPEL: PAPEL,
                             SETOR: SETOR,
-                            QUANTIDADE_MOVIMENTACAO: QUANTIDADE_MOVIMENTACAO,
+                            QUANTIDADE_MOVIMENTACAO: parseInt(QUANTIDADE_MOVIMENTACAO),
                             PRECO: PRECO,
                             DATA_COMPRA: DATA_COMPRA,
                             isCOMPRA: isCOMPRA,

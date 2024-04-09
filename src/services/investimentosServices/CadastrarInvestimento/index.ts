@@ -24,6 +24,7 @@ async function CadastrarInvestimentos(investimentoMovimentacao: investimentoMovi
         
         const pesquisaAtivo: any = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
         total = investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO * investimentoMovimentacao.PRECO;
+        investimentoMovimentacao.TIPO_ATIVO_ID = ativo[0].tipo
         
         if(pesquisaAtivo[0].length == 0 || pesquisaAtivo[0] === undefined){
             isUpdateInvestimento = false;
