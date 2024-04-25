@@ -5,7 +5,8 @@ const router = Router();
 
 /* IMPORTAÇÃO ARQUIVOS INVESTIMENTOS */
 import CadastrarInvestimentosController from "./controllers/investimentosController/CadastraInvestimentos";
-import ExibeMeusInvestimentos from '../src/controllers/investimentosController/ExibeMeusInvestimentos'
+import ExibeMeusInvestimentos from '../src/controllers/investimentosController/ExibeMeusInvestimentos';
+import Pesquisainvestimento from "./controllers/investimentosController/PesquisaInvestimento";
 
 /* IMPORTAÇÃO ARQUIVO TOTALIZADORES */
 import ExibeTotalizadores from "./controllers/totalizadoresController";
@@ -19,14 +20,21 @@ import ValidaCamposCadastroUsuario from "./middlewares/UsuarioMiddlewar/ValidaCa
 /* IMPORTAÇÃO ARQUIVOS MOVIMENTAÇÃO */
 import PesquisaMovimentacao from "./controllers/movimentacoesController/PesquisaMovimentacao";
 
+/*IMPORTACAO GOOGLE */
+import ListGoogleSheets from "./controllers/GoogleSheetsController";
+
+/* IMPORTACAO PLANILHA */
+import PlanilhaImportacao from "../src/controllers/ImportarPlanilhaController";
 
 
 /* ROTAS INVESTIMENTOS */
 router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosController);
 router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
+router.get('/investimento/:USUARIO_ID', Pesquisainvestimento);
 
 /* ROTAS MOVIMENTAÇÕES */
 router.get('/movimentacoes/:USUARIO_ID', PesquisaMovimentacao)
+
 
 /* ROTAS TOTALLIZADORES */
 router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);
@@ -36,9 +44,11 @@ router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);
 router.post('/Login', Login);
 router.post('/Usuario', ValidaCamposCadastroUsuario, CadastraUsuario);
 
+/* ROTA IMPORTAÇÃO PLANILHA */
+router.post('/importacaoPlanilha/:USUARIO_ID', PlanilhaImportacao)
 
 // testes de rotas especificas
-
+router.get('/listGoogle', ListGoogleSheets);
 
 
 export default router;

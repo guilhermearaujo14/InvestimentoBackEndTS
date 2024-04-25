@@ -8,12 +8,13 @@ function FiltraAtivoByPapel(lista: listaInterface[], papel: string){
     try {
         const ativo = lista.filter(item => item.papel === papel)
         if(ativo.length > 0){
-            return ativo;
+            return {isSucesso: true, ativo: ativo[0]};
+        }else{
+            return {isSucesso:false};
         }
-        return false;
     } catch (error) {
         console.log('[ERROR] - FiltraAtivoByPapel: ', error);
-        return false;
+        return {isSucesso: false};
     }
 }
 

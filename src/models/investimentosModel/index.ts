@@ -28,13 +28,19 @@ class Investimentos {
     }
 
     static async GetInvestimentos(ID?: number, USUARIO_ID?: number, TIPO_ATIVO_ID?: number, PAPEL?: string){
+        let FiltroID = '';
+        ID == 0 ? FiltroID = "1=1" : FiltroID = "ID = "+ ID;
+        let FiltroTipoAtivo = '';
+        TIPO_ATIVO_ID == 0 || TIPO_ATIVO_ID == undefined ? FiltroTipoAtivo = "1=1": FiltroTipoAtivo = "TIPO_ATIVO_ID = " + TIPO_ATIVO_ID
+        let FiltroPapel = '';
+        PAPEL == '' || PAPEL == undefined ? FiltroPapel = "1=1" : FiltroPapel = "PAPEL = '"+ PAPEL+"'"
         const sql = `
             SELECT * FROM INVESTIMENTOS 
             WHERE  
-                ((ID = ${ID}) OR (${ID} IS NULL) OR (${ID} = '')) 
+                ${FiltroID} 
                 AND ((USUARIO_ID = ${USUARIO_ID}) OR (${USUARIO_ID} IS NULL) OR (${USUARIO_ID} = '') OR (${USUARIO_ID} = 0))
-                AND ((TIPO_ATIVO_ID = ${TIPO_ATIVO_ID} ) OR (${TIPO_ATIVO_ID} IS NULL) OR (${TIPO_ATIVO_ID} = '') OR (${TIPO_ATIVO_ID} = 0))
-                AND ((PAPEL = '${PAPEL}') OR ('${PAPEL}' = ''))`
+                AND ${FiltroTipoAtivo}
+                AND ${FiltroPapel}`
         return sql;
     }
 

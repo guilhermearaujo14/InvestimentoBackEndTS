@@ -20,7 +20,7 @@ class Movimentacoes{
         this.isVENDA = isVENDA;
         this.DATA_INCLUSAO = DATA_INCLUSAO
     }
-
+    
     static async Criamovimentacao(INVESTIMENTOS_ID: number, QUANTIDADE: number, PRECO: number, TOTAL: number, DATA_MOVIMENTACAO: Date, isCOMPRA: boolean, isVENDA: boolean){
         const sql  = `INSERT INTO MOVIMENTACOES (INVESTIMENTOS_ID, QUANTIDADE, PRECO, TOTAL, DATA_MOVIMENTACAO, isCOMPRA, isVENDA, DATA_INCLUSAO)
         VALUES (${INVESTIMENTOS_ID},${QUANTIDADE},${PRECO},${TOTAL},'${DATA_MOVIMENTACAO}',${isCOMPRA},${isVENDA},now())`;
@@ -29,7 +29,7 @@ class Movimentacoes{
 
     static async PesquisaMovimentacao(USUARIO_ID: number, dataInicio?: string, dataFinal?: string, PAPEL?: string, TIPO_ATIVO_ID?: string){
         let FiltroDatas = '';
-        dataInicio == '' || dataInicio == undefined  || dataFinal == '' || dataFinal == undefined  ? FiltroDatas ="AND 1=1" : FiltroDatas = "AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '${dataInicio}' AND '${dataFinal}'"
+        dataInicio == '' || dataInicio == undefined  || dataFinal == '' || dataFinal == undefined  ? FiltroDatas ="AND 1=1" : FiltroDatas = "AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '"+ dataInicio +"' AND '" + dataFinal +"'"
         
         let tipoAtivo = '';
         TIPO_ATIVO_ID == '' || TIPO_ATIVO_ID == undefined ? tipoAtivo = "AND 1=1" : tipoAtivo = " AND INVESTIMENTOS.TIPO_ATIVO_ID = " +TIPO_ATIVO_ID
@@ -46,6 +46,7 @@ class Movimentacoes{
                         ${FiltroDatas} 
                         ${FiltroPapel}
                         ${tipoAtivo}
+                        ORDER BY MOVIMENTACOES.DATA_MOVIMENTACAO DESC
                         `;
         return sql;
     }

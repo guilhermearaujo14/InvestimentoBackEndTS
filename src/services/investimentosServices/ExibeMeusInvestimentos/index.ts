@@ -16,8 +16,9 @@ async function ExibeMeusInvestimentos(USUARIO_ID: number){
         const result: any = await con?.execute(sql, [USUARIO_ID]);
         const listaGoogle: any = await LerGoogleSheet();
         result[0].map(async (item: any)=>{
-            let Ativo: any = FiltraAtivoByPapel(listaGoogle, item.PAPEL);
-            item.COTACAO = Ativo[0].cotacao;
+            let Ativo = FiltraAtivoByPapel(listaGoogle, item.PAPEL);
+            let cotacao = Ativo.ativo?.cotacao;
+            item.COTACAO = cotacao
             item.TOTAL_ATUAL = item.COTACAO * item.QUANTIDADE;
             item.PERDA_LUCRO = item.TOTAL_ATUAL - item.TOTAL_INVESTIDO;
             return

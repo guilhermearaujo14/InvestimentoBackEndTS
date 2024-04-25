@@ -32,8 +32,9 @@ async function ExibeTotalizadores(USUARIO_ID: number){
         const listaGoogle: any = await LerGoogleSheet();
 
         let data = listaInvestimentos[0].map(async (item: listaTipoAtivoInterface) =>{
-            let ativo: any = await FiltraAtivoByPapel(listaGoogle, item.PAPEL);
-            item.TOTAL = item.QUANTIDADE * ativo[0].cotacao;
+            let ativo= await FiltraAtivoByPapel(listaGoogle, item.PAPEL);
+            let cotacao: any = ativo.ativo?.cotacao;
+            item.TOTAL = item.QUANTIDADE * cotacao;
             return item
         });   
         
