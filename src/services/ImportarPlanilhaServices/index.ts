@@ -8,6 +8,7 @@ import PesquisaInvestimento from '../../services/investimentosServices/PesquisaI
 import FiltraAtivoByPapel from '../../utils/FiltraAtivoByPapel';
 import Movimentacoes from '../../models/movimentacaoModel';
 import FormataDataSalvar from '../../utils/FormataDataSalvarBanco';
+import GravaLog from '../GravaLog';
 
 
 async function ImportarPlanilha(USUARIO_ID: number, listaPlanilhaImportacao:any[]){
@@ -47,9 +48,11 @@ async function ImportarPlanilha(USUARIO_ID: number, listaPlanilhaImportacao:any[
         return {isSucesso: true, message: 'Lista Inserida com sucesso!'}
     } catch (error) {
         console.log('[ERROR] - ImportarPlanilha: ', error)
+        await GravaLog(`ImportarPlanilha - ${error}`);
         return {isSucesso: false, message: 'Ops.. Não foi possivel completar importação da planilha, verifique os dados e tente novamente!'}
     }finally{
         await con?.end();
+
     }
 
 }
@@ -117,7 +120,7 @@ async function CadastrarInvestimentoExistente(USUARIO_ID: number, TIPO_ATIVO_ID:
             precoMedioAtualizado = totalAtualizado / quantidadeAtualizada;
 
             /** CRIA MOVIMENTACAO */
-            const sql_movimentacaoCompra = await Movimentacoes.Criamovimentacao(investimentoId, QUANTIDADE_MOVIMENTACAO, PRECO, totalAtualizado, 
+            const sql_movimentacaoCompra = await Movimentacoes.Criamovimentacao(investimentoId, QUANTIDADE_MOVIMENTACAO, PRECO, QUANTIDADE_MOVIMENTACAO * PRECO, 
                                                                             DATA_COMPRA, isCOMPRA, isVENDA);
             const movimentacaoCompra = await con?.execute(sql_movimentacaoCompra);
 
@@ -132,7 +135,7 @@ async function CadastrarInvestimentoExistente(USUARIO_ID: number, TIPO_ATIVO_ID:
             precoMedioAtualizado = totalAtualizado / quantidadeAtualizada;
             
             /** CRIA MOVIMENTAÇÃO */
-            const sql_movimentacaoVenda = await Movimentacoes.Criamovimentacao(investimentoId, QUANTIDADE_MOVIMENTACAO, PRECO, totalAtualizado, 
+            const sql_movimentacaoVenda = await Movimentacoes.Criamovimentacao(investimentoId, QUANTIDADE_MOVIMENTACAO, PRECO, QUANTIDADE_MOVIMENTACAO * PRECO, 
                                                                                 DATA_COMPRA, isCOMPRA, isVENDA);
             const movimentacaoVenda = await con?.execute(sql_movimentacaoVenda);
 

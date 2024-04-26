@@ -1,6 +1,9 @@
 import LerGoogleSheet from '../../api/google';
 import db from '../../database';
 import FiltraAtivoByPapel, { listaInterface } from '../../utils/FiltraAtivoByPapel';
+import GravaLog from '../GravaLog';
+
+
 
 interface listaTipoAtivoInterface{
     PAPEL: string;
@@ -54,7 +57,9 @@ async function ExibeTotalizadores(USUARIO_ID: number){
         
     } catch (error) {
         console.log('[ERROR] - ExibeTotalizadores: ', error)
+        await GravaLog(`ExibeTotalizadores - ${error}`);
         throw {isSucesso: false, message: 'Ops.. não foi possível trazer dados dos totalizadores!'};
+    }finally{
     }
 }
 

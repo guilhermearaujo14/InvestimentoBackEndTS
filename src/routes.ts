@@ -19,6 +19,7 @@ import ValidaCamposCadastroUsuario from "./middlewares/UsuarioMiddlewar/ValidaCa
 
 /* IMPORTAÇÃO ARQUIVOS MOVIMENTAÇÃO */
 import PesquisaMovimentacao from "./controllers/movimentacoesController/PesquisaMovimentacao";
+import ExcluirMovimentacao from "./controllers/movimentacoesController/ExcluiMovimentacao";
 
 /*IMPORTACAO GOOGLE */
 import ListGoogleSheets from "./controllers/GoogleSheetsController";
@@ -33,8 +34,8 @@ router.get('/meusInvestimentos/:USUARIO_ID', ExibeMeusInvestimentos);
 router.get('/investimento/:USUARIO_ID', Pesquisainvestimento);
 
 /* ROTAS MOVIMENTAÇÕES */
-router.get('/movimentacoes/:USUARIO_ID', PesquisaMovimentacao)
-
+router.get('/movimentacoes/:USUARIO_ID', PesquisaMovimentacao);
+router.delete('/excluirMovimentacao/:USUARIO_ID/:MOVIMENTACAO_ID', ExcluirMovimentacao);
 
 /* ROTAS TOTALLIZADORES */
 router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);

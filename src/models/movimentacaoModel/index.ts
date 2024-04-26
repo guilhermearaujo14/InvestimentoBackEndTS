@@ -27,7 +27,7 @@ class Movimentacoes{
         return sql;
     }
 
-    static async PesquisaMovimentacao(USUARIO_ID: number, dataInicio?: string, dataFinal?: string, PAPEL?: string, TIPO_ATIVO_ID?: string){
+    static async PesquisaMovimentacao(USUARIO_ID: number, dataInicio?: string, dataFinal?: string, PAPEL?: string, TIPO_ATIVO_ID?: string, ID?: number){
         let FiltroDatas = '';
         dataInicio == '' || dataInicio == undefined  || dataFinal == '' || dataFinal == undefined  ? FiltroDatas ="AND 1=1" : FiltroDatas = "AND MOVIMENTACOES.DATA_MOVIMENTACAO BETWEEN '"+ dataInicio +"' AND '" + dataFinal +"'"
         
@@ -36,6 +36,9 @@ class Movimentacoes{
         
         let FiltroPapel = '';
         PAPEL == '' || PAPEL == undefined ? FiltroPapel = "AND 1=1" : FiltroPapel = "AND INVESTIMENTOS.PAPEL LIKE '%" + PAPEL +"%'"
+
+        let FiltraPorID = '';
+        ID == 0 || ID == undefined ? FiltraPorID = "AND 1=1" : FiltraPorID = "AND MOVIMENTACOES.ID = "+ID
 
         const sql = `SELECT MOVIMENTACOES.ID, INVESTIMENTOS.PAPEL,  MOVIMENTACOES.QUANTIDADE, MOVIMENTACOES.PRECO, MOVIMENTACOES.TOTAL, MOVIMENTACOES.DATA_MOVIMENTACAO,
                         CASE WHEN MOVIMENTACOES.ISCOMPRA = 1 THEN 'Compra' ELSE 'Venda' END TIPO 
@@ -46,8 +49,14 @@ class Movimentacoes{
                         ${FiltroDatas} 
                         ${FiltroPapel}
                         ${tipoAtivo}
+                        ${FiltraPorID}
                         ORDER BY MOVIMENTACOES.DATA_MOVIMENTACAO DESC
                         `;
+        return sql;
+    }
+
+    static async ExcluiMovimentacao(ID: number){
+        const sql = `DELETE FROM MOVIMENTACOES WHERE ID = ${ID}`;
         return sql;
     }
 }
