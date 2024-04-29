@@ -18,7 +18,8 @@ const servlessApp = Serverless(app);
 export const handler = async (event: any, context: any) => {
     return await servlessApp(event, context);
   };
-
+/*
 app.listen(PORT, ()=>{
     console.log(`Servidor funcionando na porta ${PORT}`);
 })
+*/
