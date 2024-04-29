@@ -7,7 +7,11 @@ import Serverless from "serverless-http";
 
 
 const app = express();
-app.use(cors())
+
+app.use(cors({
+    origin: 'https://same-deadpool-purple-greece.bohr.io'
+  }))
+  
 app.use(express.json())
 const PORT = 3300;
 app.use(router)
