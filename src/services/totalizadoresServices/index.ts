@@ -1,4 +1,4 @@
-import LerGoogleSheet from '../../api/google';
+import LerGoogleSheet from '../../externos/google';
 import db from '../../database';
 import FiltraAtivoByPapel, { listaInterface } from '../../utils/FiltraAtivoByPapel';
 import GravaLog from '../GravaLog';

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../../../database"));
 const investimentosModel_1 = __importDefault(require("../../../models/investimentosModel"));
 const index_1 = __importDefault(require("../../../models/movimentacaoModel/index"));
-const google_1 = __importDefault(require("../../../api/google"));
+const google_1 = __importDefault(require("../../../externos/google"));
 const FiltraAtivoByPapel_1 = __importDefault(require("../../../utils/FiltraAtivoByPapel"));
 function cadastraInvestimento(investimentoMovimentacao) {
     return __awaiter(this, void 0, void 0, function* () {

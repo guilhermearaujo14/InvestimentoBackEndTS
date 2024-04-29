@@ -1,7 +1,7 @@
 import { json } from 'stream/consumers';
 import db from '../../../database';
 import InvestimentosModel from '../../../models/investimentosModel';
-import LerGoogleSheet from '../../../api/google';
+import LerGoogleSheet from '../../../externos/google';
 import FiltraAtivoByPapel from '../../../utils/FiltraAtivoByPapel';
 import CadastraMovimentacao from '../../movimentacoesServices/CadastraMovimentacao/index';
 

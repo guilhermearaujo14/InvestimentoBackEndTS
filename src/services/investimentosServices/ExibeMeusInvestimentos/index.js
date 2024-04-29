@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../../../database"));
 const FiltraAtivoByPapel_1 = __importDefault(require("../../../utils/FiltraAtivoByPapel"));
-const google_1 = __importDefault(require("../../../api/google"));
+const google_1 = __importDefault(require("../../../externos/google"));
 function ExibeMeusInvestimentos(USUARIO_ID) {
     return __awaiter(this, void 0, void 0, function* () {
         const con = yield (0, database_1.default)();

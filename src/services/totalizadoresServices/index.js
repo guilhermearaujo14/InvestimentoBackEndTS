@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const google_1 = __importDefault(require("../../api/google"));
+const google_1 = __importDefault(require("../../externos/google"));
 const database_1 = __importDefault(require("../../database"));
 const FiltraAtivoByPapel_1 = __importDefault(require("../../utils/FiltraAtivoByPapel"));
 const GravaLog_1 = __importDefault(require("../GravaLog"));

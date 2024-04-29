@@ -1,4 +1,4 @@
-import LerGoogleSheet from '../../api/google';
+import LerGoogleSheet from '../../externos/google';
 import db from '../../database';
 import investimentoMovimentacao from '../../interface/InvestimentoMovimentacao';
 import PlanilhaImportacao from '../../interface/planilhaImportacao';

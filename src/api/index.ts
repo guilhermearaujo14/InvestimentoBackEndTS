@@ -1,6 +1,6 @@
 import express from "express";
-import router from "./routes";
-import conexao from "./database";
+import router from "../routes";
+import conexao from "../database";
 import 'dotenv/config';
 import cors from 'cors';
 

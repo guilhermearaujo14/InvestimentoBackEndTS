@@ -1,4 +1,4 @@
-import LerGoogleSheet from "../../api/google";
+import LerGoogleSheet from "../../externos/google";
 
 
 async function ListGoogleSheets(){

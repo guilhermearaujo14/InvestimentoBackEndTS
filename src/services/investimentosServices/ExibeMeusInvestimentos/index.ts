@@ -1,7 +1,7 @@
 import db from '../../../database';
 import MeusInvestimentos from '../../../interface/MeusInvestimentos';
 import FiltraAtivoByPapel from '../../../utils/FiltraAtivoByPapel';
-import LerGoogleSheet from '../../../api/google';
+import LerGoogleSheet from '../../../externos/google';
 
 async function ExibeMeusInvestimentos(USUARIO_ID: number){
     const con = await db();

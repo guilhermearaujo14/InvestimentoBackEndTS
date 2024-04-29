@@ -4,7 +4,7 @@ import Pesquisainvestimento from '../PesquisaInvestimento';
 import investimentoMovimentacao from '../../../interface/InvestimentoMovimentacao/index';
 import CadastraMovimentacao from '../../movimentacoesServices/CadastraMovimentacao';
 import Movimentacoes from '../../../models/movimentacaoModel/index';
-import LerGoogleSheet from '../../../api/google';
+import LerGoogleSheet from '../../../externos/google';
 import FiltraAtivoByPapel, { listaInterface } from '../../../utils/FiltraAtivoByPapel';
 import ExibeMeusInvestimentos from '../../../controllers/investimentosController/ExibeMeusInvestimentos/index';
 
