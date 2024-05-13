@@ -1,3 +1,4 @@
+import PesquisaMovimentacao from '../../controllers/movimentacoesController/PesquisaMovimentacao/index';
 class Movimentacoes{
     ID?: number;
     INVESTIMENTOS_ID: number;
@@ -52,6 +53,11 @@ class Movimentacoes{
                         ${FiltraPorID}
                         ORDER BY MOVIMENTACOES.DATA_MOVIMENTACAO DESC
                         `;
+        return sql;
+    }
+
+    static async PesquisaMovimentacaobyId(ID: number){
+        const sql = `SELECT * FROM MOVIMENTACAO WHERE ID = ${ID}`;
         return sql;
     }
 

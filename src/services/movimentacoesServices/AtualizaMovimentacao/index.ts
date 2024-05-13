@@ -6,7 +6,7 @@ async function AtualizaMovimentacao(movimentacao: Movimentacoes){
     const con = await db();
     try {
         /** ENCONTRAR MOVIMENTACAO QUE DEVERÁ SER ATUALIZADA */
-
+         
         /** ENCONTRAR INVESTIMENTO */
 
         /** ATUALIZAR INVESTIMENTO */

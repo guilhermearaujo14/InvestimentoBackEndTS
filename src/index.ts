@@ -1,6 +1,6 @@
 import express from "express";
-import router from "../../routes";
-import conexao from "../../database";
+import router from "./routes";
+import conexao from "./database";
 import 'dotenv/config';
 import cors from 'cors';
 // import Serverless from "serverless-http";
@@ -22,5 +22,5 @@ conexao();
 //   };
 
 app.listen(PORT, ()=>{
-    console.log(`Servidor funcionando na porta ${PORT}`);
+    console.log(`Servidor funcionando na porta ${PORT}`); 
 })
