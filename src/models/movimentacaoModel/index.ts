@@ -56,7 +56,7 @@ class Movimentacoes{
         return sql;
     }
 
-    static async PesquisaMovimentacaobyId(ID: number){
+    static async PesquisaMovimentacaoPorId(ID: number){
         const sql = `SELECT * FROM MOVIMENTACAO WHERE ID = ${ID}`;
         return sql;
     }
