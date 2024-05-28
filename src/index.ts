@@ -10,8 +10,8 @@ const app = express();
 
 app.use(cors({
     origin: 'https://same-deadpool-purple-greece.bohr.io/',
-    methods: 'GET, PUT, POST, DELETE'
-
+    methods: 'GET, PUT, POST, DELETE',
+    credentials: true
 }))
 
 app.use(express.json())
