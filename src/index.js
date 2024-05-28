@@ -12,7 +12,8 @@ const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: 'https://same-deadpool-purple-greece.bohr.io/',
-    methods: 'GET, PUT, POST, DELETE'
+    methods: 'GET, PUT, POST, DELETE',
+    credentials: true
 }));
 app.use(express_1.default.json());
 const PORT = 3300;
