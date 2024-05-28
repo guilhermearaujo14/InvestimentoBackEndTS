@@ -8,7 +8,11 @@ import cors from 'cors';
 
 const app = express();
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://same-deadpool-purple-greece.bohr.io/',
+    methods: 'GET, PUT, POST, DELETE'
+
+}))
 
 app.use(express.json())
 const PORT = 3300;
