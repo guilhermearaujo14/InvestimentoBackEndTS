@@ -4,10 +4,8 @@ import PesquisaMovimentacaoByIdServices from '../../../services/movimentacoesSer
 async function PesquisaMovimentacaoById(req: Request, res: Response){
     const { MOVIMENTACAO_ID } = req.params;
 try {
-    console.log('executou')
-    //const response = await PesquisaMovimentacaoByIdServices(parseInt(MOVIMENTACAO_ID));
-    //console.log(response);
-    return res.status(200).send(true)
+    const response = await PesquisaMovimentacaoByIdServices(parseInt(MOVIMENTACAO_ID));
+    return res.status(200).send(response)
 } catch (error) {
     res.status(400).send(error)
 }

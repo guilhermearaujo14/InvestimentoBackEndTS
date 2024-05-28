@@ -12,17 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = __importDefault(require("../../../services/movimentacoesServices/AtualizaMovimentacao/index"));
-function AtualizaMovimentacao(req, res) {
+const database_1 = __importDefault(require("../../../database"));
+const movimentacaoModel_1 = __importDefault(require("../../../models/movimentacaoModel"));
+function PesquisaMovimentacaoById(ID) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { USUARIO_ID } = req.params;
-        const { MOVIMENTACAO_ID, PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA } = req.body;
+        const con = yield (0, database_1.default)();
         try {
-            const result = yield (0, index_1.default)(parseInt(USUARIO_ID), MOVIMENTACAO_ID, PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA);
-            return res.status(201).send(result);
+            const sql = yield movimentacaoModel_1.default.PesquisaMovimentacaoPorId(ID);
+            const response = yield (con === null || con === void 0 ? void 0 : con.execute(sql));
+            return response[0];
         }
         catch (error) {
         }
+        finally {
+            yield (con === null || con === void 0 ? void 0 : con.end());
+        }
     });
 }
-exports.default = AtualizaMovimentacao;
+exports.default = PesquisaMovimentacaoById;

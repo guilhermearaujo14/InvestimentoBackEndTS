@@ -1,0 +1,4 @@
+28/05/2024 - [AtualizaMovimentacao] - false;
+28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');
+28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');
+28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');

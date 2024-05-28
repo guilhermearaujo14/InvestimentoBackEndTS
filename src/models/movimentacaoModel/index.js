@@ -37,7 +37,7 @@ class Movimentacoes {
             let FiltroPapel = '';
             PAPEL == '' || PAPEL == undefined ? FiltroPapel = "AND 1=1" : FiltroPapel = "AND INVESTIMENTOS.PAPEL LIKE '%" + PAPEL + "%'";
             let FiltraPorID = '';
-            ID == 0 || ID == undefined ? FiltraPorID = "AND 1=1" : FiltraPorID = "AND MOVIMENTACOES.ID = " + ID;
+            ID == '' || ID == undefined ? FiltraPorID = "AND 1=1" : FiltraPorID = "AND MOVIMENTACOES.ID = " + ID;
             const sql = `SELECT MOVIMENTACOES.ID, INVESTIMENTOS.PAPEL,  MOVIMENTACOES.QUANTIDADE, MOVIMENTACOES.PRECO, MOVIMENTACOES.TOTAL, MOVIMENTACOES.DATA_MOVIMENTACAO,
                         CASE WHEN MOVIMENTACOES.ISCOMPRA = 1 THEN 'Compra' ELSE 'Venda' END TIPO 
                         FROM MOVIMENTACOES
@@ -50,6 +50,15 @@ class Movimentacoes {
                         ${FiltraPorID}
                         ORDER BY MOVIMENTACOES.DATA_MOVIMENTACAO DESC
                         `;
+            return sql;
+        });
+    }
+    static PesquisaMovimentacaoPorId(ID) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = `SELECT MOVIMENTACOES.ID, INVESTIMENTOS.PAPEL, MOVIMENTACOES.QUANTIDADE, MOVIMENTACOES.PRECO, MOVIMENTACOES.TOTAL, MOVIMENTACOES.DATA_MOVIMENTACAO, INVESTIMENTOS.SETOR 
+        FROM MOVIMENTACOES 
+        JOIN INVESTIMENTOS ON (MOVIMENTACOES.INVESTIMENTOS_ID = INVESTIMENTOS.ID)
+        WHERE MOVIMENTACOES.ID = ${ID}`;
             return sql;
         });
     }

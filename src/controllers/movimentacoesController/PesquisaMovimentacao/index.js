@@ -16,9 +16,10 @@ const PesquisaMovimentacao_1 = __importDefault(require("../../../services/movime
 function PesquisaMovimentacao(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { USUARIO_ID } = req.params;
-        const { dataInicio, dataFinal, papel, tipo_ativo_id } = req.query;
+        const { dataInicio, dataFinal, papel, tipo_ativo_id, movivimentacaoId } = req.query;
+        console.log(USUARIO_ID);
         try {
-            const response = yield (0, PesquisaMovimentacao_1.default)(parseInt(USUARIO_ID), dataInicio === null || dataInicio === void 0 ? void 0 : dataInicio.toString(), dataFinal === null || dataFinal === void 0 ? void 0 : dataFinal.toString(), papel === null || papel === void 0 ? void 0 : papel.toString(), tipo_ativo_id === null || tipo_ativo_id === void 0 ? void 0 : tipo_ativo_id.toString());
+            const response = yield (0, PesquisaMovimentacao_1.default)(parseInt(USUARIO_ID), dataInicio === null || dataInicio === void 0 ? void 0 : dataInicio.toString(), dataFinal === null || dataFinal === void 0 ? void 0 : dataFinal.toString(), papel === null || papel === void 0 ? void 0 : papel.toString(), tipo_ativo_id === null || tipo_ativo_id === void 0 ? void 0 : tipo_ativo_id.toString(), movivimentacaoId === null || movivimentacaoId === void 0 ? void 0 : movivimentacaoId.toString());
             return res.status(200).send(response);
         }
         catch (error) {

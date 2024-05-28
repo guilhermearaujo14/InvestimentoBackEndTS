@@ -14,12 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../../../database"));
 const movimentacaoModel_1 = __importDefault(require("../../../models/movimentacaoModel"));
-function PesquisaMovimentacoes(USUARIO_ID, dataInicio, dataFinal, PAPEL, TIPO_ATIVO_ID) {
+function PesquisaMovimentacoes(USUARIO_ID, dataInicio, dataFinal, PAPEL, TIPO_ATIVO_ID, MOVIMENTACAO_ID) {
     return __awaiter(this, void 0, void 0, function* () {
         const con = yield (0, database_1.default)();
         try {
-            const sql = yield movimentacaoModel_1.default.PesquisaMovimentacao(USUARIO_ID, dataInicio, dataFinal, PAPEL, TIPO_ATIVO_ID);
+            const sql = yield movimentacaoModel_1.default.PesquisaMovimentacao(USUARIO_ID, dataInicio, dataFinal, PAPEL, TIPO_ATIVO_ID, MOVIMENTACAO_ID);
             const response = yield (con === null || con === void 0 ? void 0 : con.execute(sql));
+            // console.log(response[0])
             return response[0];
         }
         catch (error) {

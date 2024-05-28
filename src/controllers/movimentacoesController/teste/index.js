@@ -8,21 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const index_1 = __importDefault(require("../../../services/movimentacoesServices/AtualizaMovimentacao/index"));
-function AtualizaMovimentacao(req, res) {
+function Teste(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { USUARIO_ID } = req.params;
-        const { MOVIMENTACAO_ID, PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA } = req.body;
         try {
-            const result = yield (0, index_1.default)(parseInt(USUARIO_ID), MOVIMENTACAO_ID, PAPEL, SETOR, QUANTIDADE_MOVIMENTACAO, PRECO, DATA_COMPRA, isCOMPRA, isVENDA);
-            return res.status(201).send(result);
+            return res.status(200).send('Ok');
         }
         catch (error) {
+            return res.status(400).send(error);
         }
     });
 }
-exports.default = AtualizaMovimentacao;
+exports.default = Teste;

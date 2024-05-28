@@ -21,6 +21,7 @@ import ValidaCamposCadastroUsuario from "./middlewares/UsuarioMiddlewar/ValidaCa
 import PesquisaMovimentacao from "./controllers/movimentacoesController/PesquisaMovimentacao";
 import ExcluirMovimentacao from "./controllers/movimentacoesController/ExcluiMovimentacao";
 import PesquisaMovimentacaoByIdController from "./controllers/movimentacoesController/PesquisaMovimentacaoById";
+import AtualizaMovimentacaoController from "./controllers/movimentacoesController/AtualizaMovimentacao";
 
 /*IMPORTACAO GOOGLE */
 import ListGoogleSheets from "./controllers/GoogleSheetsController";
@@ -38,6 +39,7 @@ router.get('/investimento/:USUARIO_ID', Pesquisainvestimento);
 router.get('/movimentacoes/:USUARIO_ID', PesquisaMovimentacao);
 router.delete('/excluirMovimentacao/:USUARIO_ID/:MOVIMENTACAO_ID', ExcluirMovimentacao);
 router.get('/movimentacao/:MOVIMENTACAO_ID', PesquisaMovimentacaoByIdController);
+router.put('/AtualizaMovimentacao/:USUARIO_ID', AtualizaMovimentacaoController);
 
 /* ROTAS TOTALLIZADORES */
 router.get('/totalizadores/:USUARIO_ID', ExibeTotalizadores);
@@ -54,8 +56,8 @@ router.post('/importacaoPlanilha/:USUARIO_ID', PlanilhaImportacao)
 router.get('/listGoogle', ListGoogleSheets);
 
 
-import testeController from './controllers/movimentacoesController/teste'
-router.get('/teste', testeController)
+import Teste from './controllers/movimentacoesController/teste'
+router.get('/teste', Teste)
 
 
 export default router;
