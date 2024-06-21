@@ -14,7 +14,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
-const PORT = 3300;
+const PORT = process.env.PORT || 3300;
 app.use(router)
 // conexao();
 

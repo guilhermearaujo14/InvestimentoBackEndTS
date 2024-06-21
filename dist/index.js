@@ -15,7 +15,7 @@ app.use((0, cors_1.default)({
     credentials: true
 }));
 app.use(express_1.default.json());
-const PORT = 3300;
+const PORT = process.env.PORT || 3300;
 app.use(routes_1.default);
 // conexao();
 // const servlessApp = Serverless(app);
