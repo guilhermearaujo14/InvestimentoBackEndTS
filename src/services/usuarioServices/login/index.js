@@ -65,7 +65,7 @@ function Login(CPF, SENHA) {
             return { isSucesso: false, message: 'Ops.. não foi possível fazer login!' };
         }
         finally {
-            con === null || con === void 0 ? void 0 : con.end();
+            yield (con === null || con === void 0 ? void 0 : con.end());
         }
     });
 }
