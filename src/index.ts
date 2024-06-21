@@ -25,6 +25,7 @@ conexao();
 //     return await servlessApp(event, context);
 //   };
 
-app.listen(PORT, ()=>{
-    console.log(`Servidor funcionando na porta ${PORT}`); 
-})
+// app.listen(PORT, ()=>{
+//     console.log(`Servidor funcionando na porta ${PORT}`); 
+// })
+export default app;

@@ -23,6 +23,7 @@ app.use(routes_1.default);
 // export const handler = async (event: any, context: any) => {
 //     return await servlessApp(event, context);
 //   };
-app.listen(PORT, () => {
-    console.log(`Servidor funcionando na porta ${PORT}`);
-});
+// app.listen(PORT, ()=>{
+//     console.log(`Servidor funcionando na porta ${PORT}`); 
+// })
+exports.default = app;
