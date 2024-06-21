@@ -57,7 +57,7 @@ function Login(CPF, SENHA) {
                 return { isSucesso: true, message: `Bem-vindo ${usuario.NOME}!`, usuario: usuario.NOME, usuario_id: usuario.ID };
             }
             else {
-                return { isSucesso: false, message: `Ops... Nâo foi possível fazer login, tente novamente em instantes!` };
+                return { isSucesso: false, message: `Ops... Nâo foi possível fazer login, verifique se os informados estão corretos!` };
             }
         }
         catch (error) {
@@ -65,7 +65,7 @@ function Login(CPF, SENHA) {
             return { isSucesso: false, message: 'Ops.. não foi possível fazer login!' };
         }
         finally {
-            con === null || con === void 0 ? void 0 : con.end();
+            yield (con === null || con === void 0 ? void 0 : con.end());
         }
     });
 }

@@ -2,3 +2,6 @@
 28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');
 28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');
 28/05/2024 - [AtualizaMovimentacao] - TypeError: Cannot read properties of undefined (reading 'INVESTIMENTOS_ID');
+02/06/2024 - ExcluirMovimentacao - Error: Unknown column 'NaN' in 'field list';
+02/06/2024 - ExcluirMovimentacao - Error: Unknown column 'NaN' in 'field list';
+03/06/2024 - ExcluirMovimentacao - Error: Unknown column 'NaN' in 'field list';

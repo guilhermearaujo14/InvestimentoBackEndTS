@@ -21,14 +21,14 @@ try {
     if(isSenhasIguais){
         return {isSucesso: true, message: `Bem-vindo ${usuario.NOME}!`, usuario: usuario.NOME, usuario_id: usuario.ID}
     }else{
-        return {isSucesso: false, message: `Ops... Nâo foi possível fazer login, tente novamente em instantes!`}
+        return {isSucesso: false, message: `Ops... Nâo foi possível fazer login, verifique se os informados estão corretos!`}
     }
 
 } catch (error) {
     console.log('[ERROR] - Login: ', error);
     return {isSucesso: false, message: 'Ops.. não foi possível fazer login!'}
 }finally{
-    con?.end();
+    await con?.end();
 }
 
 }

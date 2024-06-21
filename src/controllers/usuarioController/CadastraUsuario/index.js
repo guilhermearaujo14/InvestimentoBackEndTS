@@ -18,14 +18,17 @@ const PesquisaUsuario_1 = __importDefault(require("../../../services/usuarioServ
 function CadastraUsuario(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const { NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA } = req.body;
+        //console.log(req.body)
         try {
             const UsuarioResult = yield (0, PesquisaUsuario_1.default)(0, CPF);
             if (UsuarioResult) {
                 return res.status(400).send({ isSucesso: false, message: 'Ops... Já existe um usuario com esse CPF cadastrado!' });
             }
-            const usuario = new usuarioModel_1.default(0, NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA, new Date());
-            const result = yield (0, CadastraUsuario_1.default)(usuario);
-            return res.status(201).send(result);
+            else {
+                const usuario = new usuarioModel_1.default(0, NOME.toUpperCase(), CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA, new Date());
+                const result = yield (0, CadastraUsuario_1.default)(usuario);
+                return res.status(201).send(result);
+            }
         }
         catch (error) {
             res.status(400).send(error);

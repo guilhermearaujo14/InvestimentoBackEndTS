@@ -13,7 +13,7 @@ async function cadastraInvestimento(investimentoMovimentacao: investimentoMovime
     const con = await db();
     try {
         // const listaGoogle = await LerGoogleSheet();
-        // const investimento = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
+        //const investimento = await Pesquisainvestimento(0, investimentoMovimentacao.USUARIO_ID, 0, investimentoMovimentacao.PAPEL);
         const sql_pesquisaInvestimento = `SELECT * FROM INVESTIMENTOS WHERE USUARIO_ID = ? AND PAPEL = ? LIMIT 1`;
         const queryResult: any = await con?.execute(sql_pesquisaInvestimento,[investimentoMovimentacao.USUARIO_ID, investimentoMovimentacao.PAPEL])
         const investimento = queryResult[0];
@@ -64,6 +64,8 @@ async function CadastraInvestimentoNovo(investimentoMovimentacao: investimentoMo
             const movimentacaoCriada = await con?.execute(sqlCriaMovimentacao);
             
             return {isSucesso: true, message: 'Investimento criado com sucesso'}
+        }else{
+            return {isSucesso: false, message: 'Ops.. Ativo não encontrado, verifique se o código digitado esta correto!'}
         }
 
     } catch (error) {
@@ -109,20 +111,32 @@ async function CadastrarInvestimentoExistente(investimentoMovimentacao: investim
             const investimentoAtualizado = await con?.execute(sql_InvestimentoUpdate)
             return {isSucesso: true, message: 'Compra realizada com sucesso!'}
         }else{
+
+            /*VERIFICA SE QUANTIDADE INFORMADA É MENOR OU IGUAL A QUANTIDADE QUE USUÁRIO TEM EM SUA CARTEIRA */
+            if(investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO > investimento.QUANTIDADE){
+                return {isSucesso: false, message: 'Ops... A quantidade informada é maior que a permitida para venda, verifique!'}
+            }else{
             // SE FOR VENDA CRIAR A MOVIMENTACAO FAZENDO A SUBTRAÇÃO E ATUALIZAR O INVESTIMENTO   
             totalAtualizado = investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO * investimentoMovimentacao.PRECO;
             quantidadeAtualizada = investimentoExistente[0][0].QUANTIDADE - investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO;
             precoMedioAtualizado = totalAtualizado / quantidadeAtualizada;
-            
+
             /** CRIA MOVIMENTAÇÃO */
             const sql_movimentacaoVenda = await Movimentacoes.Criamovimentacao(investimentoId, investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO, investimentoMovimentacao.PRECO, totalAtualizado, 
-                                                                                investimentoMovimentacao.DATA_COMPRA, investimentoMovimentacao.isCOMPRA, investimentoMovimentacao.isVENDA);
+            investimentoMovimentacao.DATA_COMPRA, investimentoMovimentacao.isCOMPRA, investimentoMovimentacao.isVENDA);
             const movimentacaoVenda = await con?.execute(sql_movimentacaoVenda);
 
             /** ATUALIZA INVESTIMENTO */
             investimento.QUANTIDADE -=  investimentoMovimentacao.QUANTIDADE_MOVIMENTACAO;
-            investimento.TOTAL_INVESTIDO -= totalAtualizado
-            investimento.PRECO_MEDIO = investimento.TOTAL_INVESTIDO / investimento.QUANTIDADE;
+            }
+            if(investimento.QUANTIDADE === 0){
+                investimento.TOTAL_INVESTIDO = 0;
+                investimento.PRECO_MEDIO = 0;
+            }else{
+                investimento.TOTAL_INVESTIDO -= totalAtualizado
+                investimento.PRECO_MEDIO = investimento.TOTAL_INVESTIDO / investimento.QUANTIDADE;
+            }
+
 
             const sql_InvestimentoUpdate = await Investimentos.AtualizaInvestimentos(investimentoId, investimento.QUANTIDADE, investimento.PRECO_MEDIO, investimento.TOTAL_INVESTIDO);
             const investimentoAtualizado = await con?.execute(sql_InvestimentoUpdate)

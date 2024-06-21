@@ -27,6 +27,9 @@ function PesquisaUsuario(ID, CPF) {
             console.log('[DRROR] - PesquisaUsuario: ', error);
             return { isSucesso: false, message: 'Ops.. Não foi possivel encontrar usuario com os dados fornecidos.' };
         }
+        finally {
+            con === null || con === void 0 ? void 0 : con.end();
+        }
     });
 }
 exports.default = PesquisaUsuario;

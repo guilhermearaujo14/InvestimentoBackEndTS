@@ -11,6 +11,7 @@ async function ExibeMeusInvestimentos(USUARIO_ID: number){
     FROM INVESTIMENTOS
     JOIN TIPO_ATIVO ON (INVESTIMENTOS.TIPO_ATIVO_ID = TIPO_ATIVO.ID)
     WHERE USUARIO_ID = ?
+    AND INVESTIMENTOS.QUANTIDADE > 0
     ORDER BY INVESTIMENTOS.TIPO_ATIVO_ID ASC, INVESTIMENTOS.PAPEL`;
     try {
         const result: any = await con?.execute(sql, [USUARIO_ID]);

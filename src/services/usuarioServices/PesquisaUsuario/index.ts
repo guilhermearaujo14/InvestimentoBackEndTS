@@ -12,6 +12,8 @@ async function PesquisaUsuario(ID?: number, CPF?: string){
     } catch (error) {
         console.log('[DRROR] - PesquisaUsuario: ',error);
         return {isSucesso: false, message: 'Ops.. Não foi possivel encontrar usuario com os dados fornecidos.'};    
+    }finally{
+        con?.end();
     }
 }
 
