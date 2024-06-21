@@ -22,7 +22,7 @@ class Usuario{
 
     static async CadastraUsuario(NOME: string, CPF: string, DATA_NASCIMENTO: Date | undefined, TELEFONE:string | undefined, EMAIL: string, SENHA: string){
         let sql = `INSERT INTO USUARIO (NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA, DATA_INCLUSAO) 
-        VALUES (${NOME},${CPF},'${DATA_NASCIMENTO}',${TELEFONE},${EMAIL},${SENHA}, now())`
+        VALUES ('${NOME}','${CPF}','${DATA_NASCIMENTO}','${TELEFONE}','${EMAIL}','${SENHA}', now())`
         return sql
     }
 

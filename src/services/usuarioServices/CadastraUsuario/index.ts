@@ -13,7 +13,7 @@ async function CadastraUsuario(usuario: Usuario){
 
         const sqlCriaUsuario = await Usuario.CadastraUsuario(usuario.NOME, usuario.CPF, usuario.DATA_NASCIMENTO, usuario.TELEFONE, usuario.EMAIL, usuario.SENHA);
         console.log(sqlCriaUsuario);
-        //const result = await con?.execute(sqlCriaUsuario);
+        const result = await con?.execute(sqlCriaUsuario);
         return {isSucesso: true, message: 'Usuario Cadastrado com sucesso'};
 
     } catch (error) {

@@ -30,10 +30,18 @@ async function CadastraMovimentacao(movimentacoes: movimentacoesModel, isUpdateI
                     result = {isSucesso: false, message: 'Ops... Quantidade informada é maior do que disponivel para venda!'}
                 }
                 investimentoParaAtualizar.QUANTIDADE -= movimentacoes.QUANTIDADE;
-                investimentoParaAtualizar.TOTAL_INVESTIDO -= movimentacoes.TOTAL;
-                investimentoParaAtualizar.PRECO_MEDIO = investimentoParaAtualizar.TOTAL_INVESTIDO/investimentoParaAtualizar.QUANTIDADE;
-            }
+                
 
+                if(investimentoParaAtualizar.QUANTIDADE == 0){
+                    console.log('Quantidade zero')
+                    investimentoParaAtualizar.PRECO_MEDIO = 0
+                    investimentoParaAtualizar.TOTAL_INVESTIDO = 0    
+                }else{
+                    investimentoParaAtualizar.TOTAL_INVESTIDO -= movimentacoes.TOTAL;
+                    investimentoParaAtualizar.PRECO_MEDIO = investimentoParaAtualizar.TOTAL_INVESTIDO/investimentoParaAtualizar.QUANTIDADE;
+                }
+            }
+            console.log(investimentoParaAtualizar)
             if(isUpdateInvestimento == true && isPodeAtualizar == true){
                 const investimento = new Investimentos(investimentoParaAtualizar.ID,
                                                         investimentoParaAtualizar.USUARIO_ID,

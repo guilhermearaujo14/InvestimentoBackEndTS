@@ -23,7 +23,7 @@ class Usuario {
     static CadastraUsuario(NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA) {
         return __awaiter(this, void 0, void 0, function* () {
             let sql = `INSERT INTO USUARIO (NOME, CPF, DATA_NASCIMENTO, TELEFONE, EMAIL, SENHA, DATA_INCLUSAO) 
-        VALUES (${NOME},${CPF},'${DATA_NASCIMENTO}',${TELEFONE},${EMAIL},${SENHA}, now())`;
+        VALUES ('${NOME}','${CPF}','${DATA_NASCIMENTO}','${TELEFONE}','${EMAIL}','${SENHA}', now())`;
             return sql;
         });
     }

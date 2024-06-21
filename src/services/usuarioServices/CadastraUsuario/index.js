@@ -25,7 +25,7 @@ function CadastraUsuario(usuario) {
             }
             const sqlCriaUsuario = yield usuarioModel_1.default.CadastraUsuario(usuario.NOME, usuario.CPF, usuario.DATA_NASCIMENTO, usuario.TELEFONE, usuario.EMAIL, usuario.SENHA);
             console.log(sqlCriaUsuario);
-            //const result = await con?.execute(sqlCriaUsuario);
+            const result = yield (con === null || con === void 0 ? void 0 : con.execute(sqlCriaUsuario));
             return { isSucesso: true, message: 'Usuario Cadastrado com sucesso' };
         }
         catch (error) {

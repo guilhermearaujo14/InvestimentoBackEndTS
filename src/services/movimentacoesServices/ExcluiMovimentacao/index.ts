@@ -7,6 +7,8 @@ async function ExcluirMovimentacao(USUARIO_ID: number, MOVIMENTACAO_ID: number){
     const con = await db();
     const sql_SearchMovimentacoes = 'SELECT * FROM MOVIMENTACOES WHERE ID = ?';
     const sql_SearchInvestimento = 'SELECT * FROM INVESTIMENTOS WHERE ID = ?';
+    let total;
+    let precoMedio; 
     try {
         /** ENCONTRA MOVIMENTACAO */
         const result: any = await con?.execute(sql_SearchMovimentacoes,[MOVIMENTACAO_ID]);
@@ -18,8 +20,13 @@ async function ExcluirMovimentacao(USUARIO_ID: number, MOVIMENTACAO_ID: number){
 
         /** ATUALIZA INVESTIMENTO */
         const quantidade = investimento.QUANTIDADE - movimentacao.QUANTIDADE;
-        const total = investimento.TOTAL_INVESTIDO - movimentacao.TOTAL;
-        const precoMedio = total / quantidade;
+        if(quantidade === 0){
+            total = 0;
+            precoMedio = 0;
+        }else{
+             total = investimento.TOTAL_INVESTIDO - movimentacao.TOTAL;
+             precoMedio = total / quantidade;
+        }
         const sql_atualizaInvestimentos = await Investimentos.AtualizaInvestimentos(movimentacao.INVESTIMENTOS_ID, quantidade,precoMedio, total);
         await con?.execute(sql_atualizaInvestimentos);
 

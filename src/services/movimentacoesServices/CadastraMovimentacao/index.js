@@ -45,9 +45,17 @@ function CadastraMovimentacao(movimentacoes, isUpdateInvestimento) {
                     result = { isSucesso: false, message: 'Ops... Quantidade informada é maior do que disponivel para venda!' };
                 }
                 investimentoParaAtualizar.QUANTIDADE -= movimentacoes.QUANTIDADE;
-                investimentoParaAtualizar.TOTAL_INVESTIDO -= movimentacoes.TOTAL;
-                investimentoParaAtualizar.PRECO_MEDIO = investimentoParaAtualizar.TOTAL_INVESTIDO / investimentoParaAtualizar.QUANTIDADE;
+                if (investimentoParaAtualizar.QUANTIDADE == 0) {
+                    console.log('Quantidade zero');
+                    investimentoParaAtualizar.PRECO_MEDIO = 0;
+                    investimentoParaAtualizar.TOTAL_INVESTIDO = 0;
+                }
+                else {
+                    investimentoParaAtualizar.TOTAL_INVESTIDO -= movimentacoes.TOTAL;
+                    investimentoParaAtualizar.PRECO_MEDIO = investimentoParaAtualizar.TOTAL_INVESTIDO / investimentoParaAtualizar.QUANTIDADE;
+                }
             }
+            console.log(investimentoParaAtualizar);
             if (isUpdateInvestimento == true && isPodeAtualizar == true) {
                 const investimento = new investimentosModel_1.default(investimentoParaAtualizar.ID, investimentoParaAtualizar.USUARIO_ID, investimentoParaAtualizar.TIPO_ATIVO_ID, investimentoParaAtualizar.PAPEL, investimentoParaAtualizar.NOME_EMPRESA, investimentoParaAtualizar.SETOR, investimentoParaAtualizar.QUANTIDADE, investimentoParaAtualizar.PRECO_MEDIO, investimentoParaAtualizar.TOTAL_INVESTIDO);
                 isPodeCadastrarMovimentacao = yield (0, AtualizaInvestimento_1.default)(investimento);

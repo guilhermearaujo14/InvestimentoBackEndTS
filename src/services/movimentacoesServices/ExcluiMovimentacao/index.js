@@ -21,6 +21,8 @@ function ExcluirMovimentacao(USUARIO_ID, MOVIMENTACAO_ID) {
         const con = yield (0, database_1.default)();
         const sql_SearchMovimentacoes = 'SELECT * FROM MOVIMENTACOES WHERE ID = ?';
         const sql_SearchInvestimento = 'SELECT * FROM INVESTIMENTOS WHERE ID = ?';
+        let total;
+        let precoMedio;
         try {
             /** ENCONTRA MOVIMENTACAO */
             const result = yield (con === null || con === void 0 ? void 0 : con.execute(sql_SearchMovimentacoes, [MOVIMENTACAO_ID]));
@@ -30,8 +32,14 @@ function ExcluirMovimentacao(USUARIO_ID, MOVIMENTACAO_ID) {
             const investimento = resultInvestimento[0][0];
             /** ATUALIZA INVESTIMENTO */
             const quantidade = investimento.QUANTIDADE - movimentacao.QUANTIDADE;
-            const total = investimento.TOTAL_INVESTIDO - movimentacao.TOTAL;
-            const precoMedio = total / quantidade;
+            if (quantidade === 0) {
+                total = 0;
+                precoMedio = 0;
+            }
+            else {
+                total = investimento.TOTAL_INVESTIDO - movimentacao.TOTAL;
+                precoMedio = total / quantidade;
+            }
             const sql_atualizaInvestimentos = yield investimentosModel_1.default.AtualizaInvestimentos(movimentacao.INVESTIMENTOS_ID, quantidade, precoMedio, total);
             yield (con === null || con === void 0 ? void 0 : con.execute(sql_atualizaInvestimentos));
             /** DELETA MOVIMENTAÇÃO */
