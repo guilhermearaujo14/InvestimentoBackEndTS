@@ -29,6 +29,8 @@ import ListGoogleSheets from "./controllers/GoogleSheetsController";
 /* IMPORTACAO PLANILHA */
 import PlanilhaImportacao from "../src/controllers/ImportarPlanilhaController";
 
+// IMPORTACAO PROVENTOS
+import ProventosMovimentacaoController from "./controllers/proventosMovimentacao";
 
 /* ROTAS INVESTIMENTOS */
 router.post('/cadastraInvestimento/:USUARIO_ID', CadastrarInvestimentosController);
@@ -55,6 +57,9 @@ router.post('/importacaoPlanilha/:USUARIO_ID', PlanilhaImportacao)
 // testes de rotas especificas
 router.get('/listGoogle', ListGoogleSheets);
 
+
+// ROTAS PROVENTOS
+router.post('/proventos', ProventosMovimentacaoController.CreateProventoMovimentacao)
 
 import Teste from './controllers/movimentacoesController/teste'
 router.get('/teste', Teste)
